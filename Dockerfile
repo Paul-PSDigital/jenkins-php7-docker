@@ -42,24 +42,7 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
 	ruby-full \
 	python-pip \
 	ant \
-	-qqy \
-    	apt-transport-https \
-    	ca-certificates \
-    	curl \
-    	lxc \
-    	iptables \
-    	&& rm -rf /var/lib/apt/lists/*
-
-# Install Docker from Docker Inc. repositories.
-RUN curl -sSL https://get.docker.com/ | sh
-
-# Install the magic wrapper.
-ADD ./wrapdocker /usr/local/bin/wrapdocker
-RUN chmod +x /usr/local/bin/wrapdocker
-
-# Define additional metadata for our image.
-VOLUME /var/lib/docker
-CMD ["wrapdocker"]
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN adduser --quiet jenkins
